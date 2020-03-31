@@ -5,6 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+            score:{
+              money:1000,
+              bet:0,
+              win:0
+            },
+            deleteOption:false,
             chip:1,
             istorija:[],
             ruletOpen:false,
@@ -94,9 +100,15 @@ export default new Vuex.Store({
   },
   mutations: {
     'UPRAVLJAJ_RULETOM'(state,param){
+      if(param==false){
+        state.kombinacija=[]
+        state.score.bet=0
+      }
       state.ruletOpen=param;
     },
     'UNESI_U_KOMBINACIJU'(state,kombinacija){
+      
+
       var brojac=-1;
       for (let i = 0; i < state.kombinacija.length; i++) {
         if(state.kombinacija[i].broj==kombinacija)
@@ -112,23 +124,40 @@ export default new Vuex.Store({
       console.log('Dodaje...')
       state.kombinacija.push(ele)   
     } 
-    console.log(state.kombinacija)
-    
+    state.score.bet=state.score.bet+state.chip
+    state.score.money=state.score.money-state.chip
     },
+
     'IZBACI_IZ_KOMBINACIJE'(state,kombinacija){
       for (let i = 0; i < state.kombinacija.length; i++) {
         if(state.kombinacija[i].broj==kombinacija){
+          state.score.bet=state.score.bet-state.kombinacija[i].chip
+          state.score.money=state.score.money+state.kombinacija[i].chip
           state.kombinacija.splice(i,1)
           return
         }
       }
     },
     'ISPRAZNI_KOMBINACIJU'(state){
+      console.log('Praznjenje kombinacije')
+      state.score.money=state.score.money+state.score.bet
+      state.score.bet=0
       state.kombinacija=[]
     },
+
     'IZVUCI_BROJ'(state,broj){
       state.istorija.unshift(broj)
-
+      var won=0;
+      state.kombinacija.forEach(element => {
+        if(broj==element.broj){
+          won=36*element.chip;
+        }
+      });
+      console.log(won)
+      state.score.win=won;
+      console.log(state.score.win)
+      state.score.money=state.score.money+state.score.win;
+      console.log(state.score.money)
     },
     'INCLUDE'(state,broj){
       state.kombinacija.forEach(element => {
@@ -165,7 +194,7 @@ export default new Vuex.Store({
     },
     zatvoriRulet({commit}){
       commit('UPRAVLJAJ_RULETOM',false)
-      commit('ISPRAZNI_KOMBINACIJU')
+      // commit('ISPRAZNI_KOMBINACIJU')
     },
     izvuciBroj({commit},broj){
       commit('IZVUCI_BROJ',broj)

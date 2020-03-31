@@ -60,30 +60,50 @@ export default {
         },
         orphelins(){
             var orphelins=[9,31,14,20,1,6,34,17]
-            orphelins.forEach(element => {
-                this.$store.dispatch('unesiUKombinaciju',element)
-            });
+            
+            if(this.$store.state.score.money<this.$store.state.chip*orphelins.length){
+                alert('Nemate dovoljno kredita!')
+            }else{
+                orphelins.forEach(element => {
+                    this.$store.dispatch('unesiUKombinaciju',element)
+                });
+            }
             this.close()
         },
         small(){
             var small=[33,16,24,5,10,23,8,30,11,36,13,27]
-            small.forEach(element => {
-                this.$store.dispatch('unesiUKombinaciju',element)
-            });
+            
+            if(this.$store.state.score.money<this.$store.state.chip*small.length){
+                alert('Nemate dovoljno kredita!')
+            }else{
+                small.forEach(element => {
+                    this.$store.dispatch('unesiUKombinaciju',element)
+                });
+            }
             this.close()
         },
         big(){
             var big=[22,18,29,7,28,12,35,3,26,0,32,15,19,4,21,2,25]
-            big.forEach(element => {
-                this.$store.dispatch('unesiUKombinaciju',element)
-            });
+
+            if(this.$store.state.score.money<this.$store.state.chip*big.length){
+                alert('Nemate dovoljno kredita!')
+            }else{
+                big.forEach(element => {
+                    this.$store.dispatch('unesiUKombinaciju',element)
+                });
+            }
             this.close()
         },
         zero(){
             var zero=[12,35,3,26,0,32,15]
-            zero.forEach(element => {
-                this.$store.dispatch('unesiUKombinaciju',element)
-            });
+            
+            if(this.$store.state.score.money<this.$store.state.chip*zero.length){
+                alert('Nemate dovoljno kredita!')
+            }else{
+                zero.forEach(element => {
+                    this.$store.dispatch('unesiUKombinaciju',element)
+                });
+            }
             this.close()
         }   
     }

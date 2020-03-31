@@ -4,11 +4,12 @@
       <div class="col-1">
         <LeftMenu />
       </div>
-      <div class="col-10">
+      <div class="col-9">
       <Tabla /> 
       </div>
-      <div class="col-1">
+      <div class="col-2">
         <!-- <img src="../assets/games.png" height="50px"> -->
+        <Score/>
       </div>
     </div>
   </div>
@@ -16,11 +17,13 @@
 
 <script>
 import Tabla from '@/components/Tabla.vue'
+import Score from '@/components/Score.vue'
 import LeftMenu from '@/components/LeftMenu.vue'
 export default {
   components: {
     Tabla,
-    LeftMenu
+    LeftMenu,
+    Score
   }
 }
 </script>

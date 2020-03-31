@@ -18,16 +18,15 @@ export default {
     },
     methods:{
         obojeni(){
-            this.$store.state.podaci.forEach(element => {
-                if(element.tip==this.podatak.color){
-                    if(this.odabrao){
-                        this.$store.dispatch('izbaciIzKombinacije',element.broj)
-                    }else{
+            if(this.$store.state.score.money<this.$store.state.chip*18){
+                    alert('Nemate dovoljno kredita!')
+            }else{
+                this.$store.state.podaci.forEach(element => {
+                    if(element.tip==this.podatak.color){
                         this.$store.dispatch('unesiUKombinaciju',element.broj)
                     }
-                }
-            });
-            this.odabrao=!this.odabrao;
+                });
+            }
         },
         odaberi(){
             if(this.podatak.even==null){
@@ -39,31 +38,30 @@ export default {
                     this.neparni()
                 }
             }
-            this.odabrao=!this.odabrao
         },
         parni(){
-            for (let i = 0; i <= this.podatak.max; i+=2) {
-                if(this.odabrao){
-                    this.$store.dispatch('izbaciIzKombinacije',i)
-                }else{
+            if(this.$store.state.score.money<this.$store.state.chip*18){
+                alert('Nemate dovoljno kredita!')
+            }else{
+                for (let i = 0; i <= this.podatak.max; i+=2) {
                     this.$store.dispatch('unesiUKombinaciju',i)
                 }
             }
         },
         neparni(){
-            for (let i = 1; i <= this.podatak.max; i+=2) {
-                if(this.odabrao){
-                    this.$store.dispatch('izbaciIzKombinacije',i)
-                }else{
+            if(this.$store.state.score.money<this.$store.state.chip*18){
+                alert('Nemate dovoljno kredita!')
+            }else{
+                for (let i = 1; i <= this.podatak.max; i+=2) {
                     this.$store.dispatch('unesiUKombinaciju',i)
                 }
             }
         },
         ostali(){
-            for (let i = this.podatak.min; i <= this.podatak.max; i++) {
-                if(this.odabrao){
-                    this.$store.dispatch('izbaciIzKombinacije',i)
-                }else{
+            if(this.$store.state.score.money<this.$store.state.chip*(this.podatak.max-this.podatak.min)){
+                alert('Nemate dovoljno kredita!')
+            }else{
+                for (let i = this.podatak.min; i <= this.podatak.max; i++) {
                     this.$store.dispatch('unesiUKombinaciju',i)
                 }
             }

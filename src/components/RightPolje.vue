@@ -8,23 +8,19 @@ export default {
     props:[
         'ele'
     ],
-    data(){
-        return{
-            odabrao:false
-        }
-    },
     methods:{
         odaberi(){
-            this.$store.state.podaci.forEach(element => {
-                if(element.broj%3==this.ele.kod){
-                    if(this.odabrao){
-                        this.$store.dispatch('izbaciIzKombinacije',element.broj)
-                    }else{
-                        this.$store.dispatch('unesiUKombinaciju',element.broj)
-                    }  
-                }
-            });
-            this.odabrao=!this.odabrao;
+            if(this.$store.state.score.money<this.$store.state.chip){
+                alert('Nemate dovoljno kredita!')
+            }else{
+                this.$store.state.podaci.forEach(element => {
+                    if(element.broj%3==this.ele.kod){
+                        
+                            this.$store.dispatch('unesiUKombinaciju',element.broj)  
+                        
+                    }
+                });
+            }
         }
     }
 }

@@ -21,11 +21,6 @@ export default {
     props:[
         'podatak'
     ],
-    data(){
-        return {
-            ulog:0
-        }
-    },
     create(){
         console.log(this.$store.dispatch('includeElement',this.podatak.broj))
     },
@@ -52,28 +47,19 @@ export default {
             return false
         },
         uvecaj(){
-            if(this.$store.state.ruletOpen){
-                alert('Ulaganje je zavrseno! ')
-            }else{
-                this.ulog+=this.$store.state.chip
-                this.$store.dispatch('unesiUKombinaciju',this.podatak.broj)
-                // alert('Izabran je broj: '+this.podatak.broj)
-            }
-        },
-        odaberi(){
-            if(this.$store.state.ruletOpen){
-                alert('Ulaganje je zavrseno! ')
-            }else{
-                this.$store.dispatch('unesiUKombinaciju',this.podatak.broj)
-                // alert('Izabran je broj: '+this.podatak.broj)
-            }
-        },
-        izbaci(){
-            if(this.$store.state.ruletOpen){
-                alert('Ulaganje je zavrseno! ')
-            }else{
+            if(this.$store.state.deleteOption){
                 this.$store.dispatch('izbaciIzKombinacije',this.podatak.broj)
-                // alert('Izbacen je broj: '+this.podatak.broj)
+            }else{
+                if(this.$store.state.score.money<this.$store.state.chip){
+                    alert('Nemate dovoljno kredita!')
+                }else{
+                    if(this.$store.state.ruletOpen){
+                        alert('Ulaganje je zavrseno! ')
+                    }else{
+                        this.$store.dispatch('unesiUKombinaciju',this.podatak.broj)
+                        // alert('Izabran je broj: '+this.podatak.broj)
+                    }
+                }
             }
         }
     }

@@ -11,6 +11,11 @@
             <polje :podatak="$store.state.leftData"></polje>
             <br>
             <button id='chip' @click="uvecaj()">{{$store.state.chip}}</button>
+            <br>
+            <br>
+            <!-- <h1 id="deleteBtn" @click="deleteMode()"> - </h1> -->
+            <button class="btn" id='deleteBtn' @click="deleteMode()"><i class="fa fa-trash">-</i></button>
+
         </div>
         <div class="col-10">
             <div class="row">
@@ -69,6 +74,9 @@ export default {
         },
         uvecaj(){
             this.$store.dispatch('updateChip')
+        },
+        deleteMode(){
+            this.$store.state.deleteOption=!this.$store.state.deleteOption
         }
     }
 }
@@ -88,5 +96,9 @@ export default {
     /* position: fixed; */
     background: white;
     border: 10px solid yellow;
+}
+#deleteBtn{
+    color: white;
+    
 }
 </style>
