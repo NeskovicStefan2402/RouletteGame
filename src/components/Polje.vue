@@ -2,7 +2,7 @@
         <button v-if="vrednost==null" :class="podatak.tip" class="form-control" @click="uvecaj()">
             <h5>{{podatak.broj}}</h5>
         </button>
-        <button v-else class="odabrano form-control" @click="uvecaj()">
+        <button v-else :class="parseInt(podatak.broj)==0 ? 'odabrano0' : 'odabrano'" class=" form-control" @click="uvecaj()">
             <div class="row">
                 <div class="col-6">
                     <h5>{{vrednost.broj}}</h5>
@@ -17,6 +17,7 @@
         </button>
 </template>
 <script>
+import eventBus from '../main'
 export default {
     props:[
         'podatak'
@@ -89,6 +90,11 @@ export default {
     background-color: goldenrod;
     text-align: center;
     height: 80px;
+}
+.odabrano0{
+    background-color: goldenrod;
+    text-align: center;
+    height: 240px;
 }
 .check{
     border-radius: 50%;

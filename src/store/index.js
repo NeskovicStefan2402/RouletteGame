@@ -6,10 +6,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
             score:{
-              money:1000,
+              money:localStorage.getItem('money')==null ? 1000 : parseInt(localStorage.getItem('money')),
               bet:0,
-              win:0
+              win:0,
+              history: JSON.parse(localStorage.getItem('history'))==null ? [] : JSON.parse(localStorage.getItem('history'))
+              // money:Object.values(localStorage.getItem('podaci'))[0],
+              // bet:Object.values(localStorage.getItem('podaci'))[1],
+              // win:Object.values(localStorage.getItem('podaci'))[2]
             },
+            profileOpen:false,
             deleteOption:false,
             chip:1,
             istorija:[],
@@ -121,7 +126,6 @@ export default new Vuex.Store({
         broj:kombinacija,
         chip:state.chip
       }
-      console.log('Dodaje...')
       state.kombinacija.push(ele)   
     } 
     state.score.bet=state.score.bet+state.chip
@@ -139,7 +143,6 @@ export default new Vuex.Store({
       }
     },
     'ISPRAZNI_KOMBINACIJU'(state){
-      console.log('Praznjenje kombinacije')
       state.score.money=state.score.money+state.score.bet
       state.score.bet=0
       state.kombinacija=[]
@@ -153,11 +156,19 @@ export default new Vuex.Store({
           won=36*element.chip;
         }
       });
-      console.log(won)
       state.score.win=won;
-      console.log(state.score.win)
       state.score.money=state.score.money+state.score.win;
-      console.log(state.score.money)
+      localStorage.setItem('money',state.score.money)
+      if(state.score.bet!=0){
+        var score={
+          money:parseInt(state.score.money),
+          bet:parseInt(state.score.bet),
+          won:parseInt(state.score.win)
+        }
+        var jsonStringObject=JSON.stringify(score);
+        state.score.history.push(jsonStringObject)
+        localStorage.setItem('history',JSON.stringify(state.score.history))
+      }
     },
     'INCLUDE'(state,broj){
       state.kombinacija.forEach(element => {
@@ -186,6 +197,10 @@ export default new Vuex.Store({
           state.chip=1
           break;
       }
+    },
+    'UPDATE_PROFILE'(state){
+      state.profileOpen=!state.profileOpen
+      console.log(state.profileOpen)
     }
   },
   actions: {
@@ -210,6 +225,9 @@ export default new Vuex.Store({
     },
     updateChip({commit}){
       commit('UPDATE_CHIP')
+    },
+    updateProfile({commit}){
+      commit('UPDATE_PROFILE')
     }
   },
   modules: {

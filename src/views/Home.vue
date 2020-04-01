@@ -32,6 +32,11 @@ export default {
   
   background-image: url('../assets/pozadina.jpg');
   height: 100%;
-  position: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 100px;
+  /* height: 100%; */
+  /* position: fixed; */
 }
 </style>

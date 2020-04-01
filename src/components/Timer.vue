@@ -28,7 +28,9 @@ export default {
             var id = setInterval(function()
             {
                 vm.brojac++;
-                console.log(vm.brojac)
+                if(vm.$store.state.profileOpen){
+                   clearInterval(id); 
+                }
                 if(vm.brojac==31)
                 {
                     // vm.brojac=0;
@@ -38,7 +40,7 @@ export default {
                     vm.$router.push('/roulette')
                     clearInterval(id);
                 }
-            }, 500);
+            }, 1000);
         }
     }
 }

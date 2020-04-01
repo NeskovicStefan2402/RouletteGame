@@ -14,7 +14,7 @@
             <br>
             <br>
             <!-- <h1 id="deleteBtn" @click="deleteMode()"> - </h1> -->
-            <button class="btn" id='deleteBtn' @click="deleteMode()"><i class="fa fa-trash">-</i></button>
+            <button class="btn" id='deleteBtn' @click="deleteMode()">DEL</button>
 
         </div>
         <div class="col-10">
@@ -61,6 +61,17 @@ export default {
             modal:false
         }
     },
+    created(){
+        setTimeout(() => {
+            if(this.$store.state.score.money==0){
+                var odg=confirm('Game over! Do you want to play again?')
+                if(odg==true){
+                    this.$store.state.score.money=1000
+                }
+            }    
+        }, 1000);
+        
+    },
     mounted(){
         // this.$store.dispatch('obrisiSve')
         eventBus.$on('close',ele=>{
@@ -99,6 +110,7 @@ export default {
 }
 #deleteBtn{
     color: white;
+    border: 0.5px solid white;
     
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <button class="polje"  @click="odaberi()">
+    <button class="polje form-control"  @click="odaberi()">
         <h5>{{ele.text}}</h5>
     </button>
 </template>
@@ -10,7 +10,7 @@ export default {
     ],
     methods:{
         odaberi(){
-            if(this.$store.state.score.money<this.$store.state.chip){
+            if(this.$store.state.score.money<this.$store.state.chip*12){
                 alert('Nemate dovoljno kredita!')
             }else{
                 this.$store.state.podaci.forEach(element => {
@@ -30,7 +30,7 @@ export default {
     background: transparent;
     border: 1px solid white;
     text-align: center;
-    /* padding: 5px; */
+    /* padding-top: 15px; */
     color: white;
     height: 80px;
     /* transform: rotate(90deg); */

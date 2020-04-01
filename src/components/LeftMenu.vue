@@ -2,7 +2,8 @@
     <a v-if="open==false" @mouseover="openNav()" style="font-size:30px;cursor:pointer; color:white;">&#9776;</a>
     <div v-else id="menu" class="sidenav" @mouseleave="closeNav()">
         <label  class="closebtn" @click="closeNav()">&times;</label>
-        <label  >Profile</label >
+        <!-- <label  >Profile</label > -->
+        <router-link tag='label' to='/profile'>Profile</router-link>
         <label  >Rules</label >
         <label >Add chips</label >
         <label  >Exit</label >

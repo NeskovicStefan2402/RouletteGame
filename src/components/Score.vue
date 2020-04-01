@@ -1,10 +1,6 @@
 <template>
     <div id="menu" class="sidenav">
-        <!-- <label  class="closebtn" @click="closeNav()">&times;</label> -->
-        <!-- <label  >Profile</label >
-        <label  >Rules</label >
-        <label >Add chips</label >
-        <label  >Exit</label > -->
+        <img src="../assets/profile.png" height="150px">
         <label>Bank: {{$store.state.score.money}}</label>
         <label>Bet: {{$store.state.score.bet}}</label>
         <label>Win: {{$store.state.score.win}}</label>
