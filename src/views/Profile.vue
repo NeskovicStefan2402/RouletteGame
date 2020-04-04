@@ -1,8 +1,15 @@
 <template>
 <div class="pozadina">
+    <div class="row">
+        <div class="col-2">
+            <router-link tag="button" to='/' class="back form-control"><- Back</router-link>
+        </div>
+    </div>
     <div class="row ">
         <div class="col-4">
             <img src="../assets/profile.png" height="300px">
+            <Level color='black'/>
+            <br>
         </div>
         <div class="col-8">
             <br>
@@ -12,12 +19,19 @@
                 <div class="col-3 headerPolje"><h5><b>{{bets}} RSD</b></h5></div>
                 <div class="col-3 headerPolje"><h5><b>{{wons}} RSD</b></h5></div>
             </div>
+            <br>
+            <div class="row">
+                <div class="col-3"><h2>Bank</h2></div>
+                <div class="col-3"><h2>Total bets</h2></div>
+                <div class="col-3"><h2>Total wins</h2></div>
+            </div>
         </div>
     </div>
     <div class="row" >
         <div class="col-4">
             <div class="polje" v-for="i in $store.state.score.history.slice(0,7)"><b>{{JSON.parse(i).money}} RSD</b></div>
-            <div class="polje" ><b>...</b></div>
+            <div class="polje" @click="modal=true" ><b>...</b></div>
+            <History v-if="modal"/>
         </div>
         <div class="col-7 polje">
             <Grafikon/>
@@ -28,9 +42,24 @@
 </template>
 <script>
 import Grafikon from '../components/LineGraph'
+import History from '../components/HistoryModal'
+import Level from '../components/Level'
+import eventBus from '../main'
 export default {
     components:{
-        Grafikon
+        Grafikon,
+        History,
+        Level
+    },
+    data(){
+        return{
+            modal:false
+        }
+    },
+    mounted(){
+        eventBus.$on('ugasi',ele=>{
+            this.modal=false;
+        })
     },
     created(){
         this.$store.dispatch('updateProfile')
@@ -54,7 +83,7 @@ export default {
             return suma
         },
         now(){
-            return JSON.parse(this.$store.state.score.history[this.$store.state.score.history.length-1]).money
+            return JSON.parse(this.$store.state.score.money)
         }
     }
 }
@@ -68,6 +97,10 @@ export default {
     text-align: center;
     /* box-shadow: 10px 10px 10px -5px rgba(0, 0, 0, 0.367); */
     box-shadow: 10px 10px 94px -7px rgba(0,0,0,0.39);
+}
+.back {
+  background-color: rgb(78, 74, 74);
+  color: white;
 }
 .headerPolje{
     background-color: rgb(213, 208, 255);

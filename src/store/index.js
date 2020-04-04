@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+            debt:0,
+            debts:JSON.parse(localStorage.getItem('debt'))==null ? [] : JSON.parse(localStorage.getItem('debt')),
             score:{
               money:localStorage.getItem('money')==null ? 1000 : parseInt(localStorage.getItem('money')),
               bet:0,
@@ -159,6 +161,10 @@ export default new Vuex.Store({
       state.score.win=won;
       state.score.money=state.score.money+state.score.win;
       localStorage.setItem('money',state.score.money)
+      
+      state.debts.push(JSON.stringify(state.debt))  
+      localStorage.setItem('debt',JSON.stringify(state.debts))
+      state.debt=0
       if(state.score.bet!=0){
         var score={
           money:parseInt(state.score.money),
@@ -168,7 +174,8 @@ export default new Vuex.Store({
         var jsonStringObject=JSON.stringify(score);
         state.score.history.push(jsonStringObject)
         localStorage.setItem('history',JSON.stringify(state.score.history))
-      }
+      } 
+      
     },
     'INCLUDE'(state,broj){
       state.kombinacija.forEach(element => {

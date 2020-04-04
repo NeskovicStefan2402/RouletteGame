@@ -4,12 +4,13 @@
         <label  class="closebtn" @click="closeNav()">&times;</label>
         <!-- <label  >Profile</label > -->
         <router-link tag='label' to='/profile'>Profile</router-link>
-        <label  >Rules</label >
-        <label >Add chips</label >
-        <label  >Exit</label >
+        <router-link tag='label' to='/rules'>Rules</router-link>
+        <label @click="addChip()">Add chips</label >
+        <label  @click="exit()">Exit</label >
     </div>
 </template>
 <script>
+import eventBus from '../main'
 export default {
     data(){
         return{
@@ -22,6 +23,12 @@ export default {
         },
         openNav(){
             this.open=true
+        },
+        addChip(){
+          eventBus.$emit('addChipsOpen')
+        },
+        exit(){
+          document.open('http://www.google.rs')
         }
     }
 };

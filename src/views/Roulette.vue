@@ -1,6 +1,5 @@
 <template>
   <div>
-      
     <video id='video' muted  autoplay>
         <source src="../assets/videos/roulette.mp4" type="video/mp4">
     </video>

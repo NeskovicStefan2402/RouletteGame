@@ -9,10 +9,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6"></div>
+                <div class="col-2"></div>
                 <div class="check col-6">
-                    <h5>{{vrednost.chip}}</h5>
+                    <b>{{vrednost.chip}}</b>
                 </div>
+                <div class="col-2"></div>
             </div>
         </button>
 </template>
@@ -38,7 +39,6 @@ export default {
     },
     methods:{
         includeElement(){
-            console.log('Provera...')
             this.$store.state.kombinacija.forEach(element => {
                 if(element.broj==this.podatak.broj){
                     console.log('True ')

@@ -5,7 +5,8 @@
         <LeftMenu />
       </div>
       <div class="col-9">
-      <Tabla /> 
+      <Tabla />
+      <ChipModal v-if="addChips"/> 
       </div>
       <div class="col-2">
         <!-- <img src="../assets/games.png" height="50px"> -->
@@ -19,11 +20,28 @@
 import Tabla from '@/components/Tabla.vue'
 import Score from '@/components/Score.vue'
 import LeftMenu from '@/components/LeftMenu.vue'
+import ChipModal from '@/components/ChipModal.vue'
+import eventBu from '../main'
+import eventBus from '../main'
 export default {
   components: {
     Tabla,
     LeftMenu,
-    Score
+    Score,
+    ChipModal
+  },
+  data(){
+    return{
+      addChips:false
+    }
+  },
+  mounted(){
+    eventBus.$on('addChipsClose',ele=>{
+      this.addChips=false
+    });
+    eventBus.$on('addChipsOpen',ele=>{
+      this.addChips=true
+    });
   }
 }
 </script>
@@ -31,12 +49,12 @@ export default {
 .home{
   
   background-image: url('../assets/pozadina.jpg');
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-bottom: 100px;
-  /* height: 100%; */
-  /* position: fixed; */
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+	
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
 }
 </style>

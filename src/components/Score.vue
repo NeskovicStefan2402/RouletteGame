@@ -1,14 +1,21 @@
 <template>
     <div id="menu" class="sidenav">
+      <div class="container">
         <img src="../assets/profile.png" height="150px">
+        <Level color='white'/>
         <label>Bank: {{$store.state.score.money}}</label>
         <label>Bet: {{$store.state.score.bet}}</label>
         <label>Win: {{$store.state.score.win}}</label>
+      </div>
+        
     </div>
 </template>
 <script>
+import Level from '../components/Level'
 export default {
-    
+  components:{
+    Level
+  }
 }
 </script>
 <style scoped>

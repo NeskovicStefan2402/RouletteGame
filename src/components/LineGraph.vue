@@ -42,7 +42,6 @@ export default {
   created(){
       
       setTimeout(() => {
-  //       this.planetChartData.skracenica=0;
             this.createChart('planet-chart',this.planetChartData);      
             console.log(this.planetChartData.data.datasets[0].data)
       }, 1000);
