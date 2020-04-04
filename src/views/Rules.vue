@@ -32,8 +32,6 @@ export default {
 </script>
 <style scoped>
 .pozadina{
-    margin: 30px auto;
-    margin-top:0px;
     padding: 50px;
     background-color: rgb(194, 193, 193);
 }

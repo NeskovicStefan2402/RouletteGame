@@ -3,8 +3,8 @@
     <div v-else id="menu" class="sidenav" @mouseleave="closeNav()">
         <label  class="closebtn" @click="closeNav()">&times;</label>
         <!-- <label  >Profile</label > -->
-        <router-link tag='label' to='/profile'>Profile</router-link>
-        <router-link tag='label' to='/rules'>Rules</router-link>
+        <router-link tag='label' to='/profile' @click.native="clearBet()">Profile</router-link>
+        <router-link tag='label' to='/rules' @click.native="clearBet()">Rules</router-link>
         <label @click="addChip()">Add chips</label >
         <label  @click="exit()">Exit</label >
     </div>
@@ -21,6 +21,10 @@ export default {
         closeNav(){
             this.open=false
         },
+        clearBet(){
+          console.log('Clear bet...')
+           this.$store.dispatch('obrisiSve')
+        },
         openNav(){
             this.open=true
         },
@@ -28,7 +32,8 @@ export default {
           eventBus.$emit('addChipsOpen')
         },
         exit(){
-          document.open('http://www.google.rs')
+          this.clearBet()
+          window.location.href = 'http://www.google.com';
         }
     }
 };

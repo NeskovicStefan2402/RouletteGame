@@ -18,7 +18,7 @@ export default {
     },
     methods:{
         obojeni(){
-            if(this.$store.state.score.money<this.$store.state.chip*18){
+            if(this.$store.state.score.money<=this.$store.state.chip*18){
                     alert('Nemate dovoljno kredita!')
             }else{
                 this.$store.state.podaci.forEach(element => {
@@ -40,7 +40,7 @@ export default {
             }
         },
         parni(){
-            if(this.$store.state.score.money<this.$store.state.chip*18){
+            if(this.$store.state.score.money<=this.$store.state.chip*18){
                 alert('Nemate dovoljno kredita!')
             }else{
                 for (let i = 0; i <= this.podatak.max; i+=2) {
@@ -49,7 +49,7 @@ export default {
             }
         },
         neparni(){
-            if(this.$store.state.score.money<this.$store.state.chip*18){
+            if(this.$store.state.score.money<=this.$store.state.chip*18){
                 alert('Nemate dovoljno kredita!')
             }else{
                 for (let i = 1; i <= this.podatak.max; i+=2) {
@@ -58,7 +58,7 @@ export default {
             }
         },
         ostali(){
-            if(this.$store.state.score.money<this.$store.state.chip*(this.podatak.max-this.podatak.min)){
+            if(this.$store.state.score.money<this.$store.state.chip*(this.podatak.max-this.podatak.min+1)){
                 alert('Nemate dovoljno kredita!')
             }else{
                 for (let i = this.podatak.min; i <= this.podatak.max; i++) {

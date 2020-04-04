@@ -114,8 +114,6 @@ export default new Vuex.Store({
       state.ruletOpen=param;
     },
     'UNESI_U_KOMBINACIJU'(state,kombinacija){
-      
-
       var brojac=-1;
       for (let i = 0; i < state.kombinacija.length; i++) {
         if(state.kombinacija[i].broj==kombinacija)
@@ -145,7 +143,10 @@ export default new Vuex.Store({
       }
     },
     'ISPRAZNI_KOMBINACIJU'(state){
+      console.log(state.score.money)
       state.score.money=state.score.money+state.score.bet
+      console.log(state.score.money)
+      console.log(state.score.bet)
       state.score.bet=0
       state.kombinacija=[]
     },

@@ -13,7 +13,7 @@
                       </div>
                       <div class="col-7">
                           <input type="text" class="form-control" v-model="chips">
-                          <p><i>If you want to get more chips, your level points will be clear with that chips values!</i></p>
+                          <p><i>If you want to get more chips, your level points will be clear with that chips values, two times!</i></p>
                       </div>
                   </div>
                 <div v-if="war" class="alert alert-warning alert-dismissible fade show">
@@ -49,13 +49,14 @@ export default {
             eventBus.$emit('addChipsClose')
         },
         add(){
-            var dug=this.debts()+parseInt(this.$store.state.debt)+parseInt(this.chips)
+            var dug=this.debts()+parseInt(this.$store.state.debt)+parseInt(this.chips)*2
             var suma=this.wins()
             console.log('Suma je: '+suma)
             console.log('Dug je: '+dug)
             if(suma>=dug){
                 this.$store.state.debt=parseInt(this.$store.state.debt)+parseInt(this.chips)
                 this.$store.state.score.money=this.$store.state.score.money+this.$store.state.debt;
+                this.$store.state.debt=parseInt(this.$store.state.debt)+parseInt(this.chips)
 
                 this.close()
             }else{
